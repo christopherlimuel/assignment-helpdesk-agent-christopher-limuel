@@ -25,17 +25,6 @@ async def detect_intent(query: str) -> str:
     Menentukan intent dari query user. Harus mengembalikan salah satu:
       - "faq"           -> pertanyaan informasi/kebijakan, arahkan ke RAG
       - "ticket_status"  -> permintaan cek status tiket, arahkan ke tool call
-    # TODO: implementasikan intent detection menggunakan LLM (structured prompt,
-    # lihat Sesi 10.1) ATAU pendekatan sederhana berbasis keyword sebagai baseline
-    # sebelum beralih ke pendekatan berbasis LLM.
-    #
-    # Contoh prompt yang bisa dipakai sebagai starting point:
-    #
-    #   "Klasifikasikan pertanyaan berikut ke dalam salah satu kategori:
-    #    'faq' (pertanyaan informasi/kebijakan umum) atau
-    #    'ticket_status' (permintaan mengecek status tiket tertentu).
-    #    Jawab hanya dengan satu kata.
-    #    Pertanyaan: {query}"
     """
 
     prompt = f"""
@@ -84,7 +73,6 @@ async def handle_query(query: str) -> dict:
 
 def extract_ticket_id(query: str) -> str:
     """
-    # TODO: implementasikan ekstraksi ticket_id dari teks query.
     # Format ticket_id pada mock_tickets.csv adalah 'TICKET-XXXX'.
 
     # Contoh format yang diterima oleh regex:

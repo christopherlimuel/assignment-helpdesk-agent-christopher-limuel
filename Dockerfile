@@ -1,6 +1,3 @@
-# 🔧 TODO: lengkapi Dockerfile berikut mengikuti pola yang sudah dipelajari
-# di Sesi 14.2 (FROM python -> WORKDIR -> COPY -> RUN pip -> CMD).
-
 FROM python:3.11-slim
 
 WORKDIR /app

@@ -21,10 +21,6 @@ _client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 KNOWLEDGE_BASE_PATH = "data/it_helpdesk_knowledge_base.csv"
 
-# 🔧 TODO: muat knowledge base dan bangun index FAISS saat aplikasi startup
-# (bukan di setiap request), agar lebih efisien. Pertimbangkan menggunakan
-# FastAPI startup event atau lazy-loading dengan cache sederhana.
-
 _index = None
 _documents = None
 _df = None
@@ -64,11 +60,6 @@ def _build_prompt(query, context):
 
 
 def build_index(csv_path):
-    """
-    # TODO: implementasikan pembangunan index FAISS dari knowledge base CSV.
-    # Referensi: starter_notebook_semantic_search.ipynb dari Assignment 3,
-    # Section 1-4 (load data -> unit retrievable -> embedding -> simpan ke FAISS).
-    """
     global _index, _documents, _df
     _df = pd.read_csv(csv_path)
     _df['content'] = "Q: " + _df["question"] + " A: " + _df["answer"]
@@ -83,10 +74,6 @@ def build_index(csv_path):
 
 
 def semantic_search(query: str, top_k: int = 3):
-    """
-    # TODO: implementasikan semantic search terhadap index yang sudah dibangun.
-    # Referensi: starter_notebook_semantic_search.ipynb, Section 5.
-    """
     global _index, _df
 
     if _index is None:
@@ -114,9 +101,6 @@ async def answer_from_knowledge_base(query: str) -> dict:
     Fungsi yang dipanggil router.py ketika intent = 'faq'.
     Menjalankan semantic search, menyusun prompt dengan context hasil retrieval,
     lalu memanggil LLM untuk menghasilkan jawaban.
-
-    # TODO: implementasikan alur lengkap: semantic_search -> build prompt
-    # (Persona/Task/Context/Format, lihat Assignment 3 Section 6) -> panggil LLM.
     """
     search_result = semantic_search(query, top_k=3)
     prompt = _build_prompt(query, search_result)

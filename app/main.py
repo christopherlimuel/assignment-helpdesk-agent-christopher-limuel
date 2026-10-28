@@ -38,9 +38,6 @@ async def ask(request: AskRequest):
     Endpoint utama. Menerima pertanyaan bebas dari user (bisa berupa
     pertanyaan informasi/kebijakan ATAU permintaan cek status tiket),
     lalu meneruskannya ke router untuk diproses.
-
-    # TODO: tambahkan error handling untuk kondisi LLM gagal merespons
-    # atau intent tidak dapat dikenali (lihat panduan error handling di Sesi 13.4)
     """
     result = await handle_query(request.query)
     return AskResponse(**result)
