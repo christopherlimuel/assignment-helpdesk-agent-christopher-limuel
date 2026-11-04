@@ -89,5 +89,3 @@ def extract_ticket_id(query: str) -> str:
     if not ticket_ids:
         return ""
     return f"TICKET-{ticket_ids[-1]}"
-
-print(handle_query("Gimana cara reset password VPN"))
